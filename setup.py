@@ -34,7 +34,7 @@ def initialize(featureList, x, y):
 
     #'Cabin',
     print(x)
-    titanicModel = RandomForestRegressor()
+    titanicModel = RandomForestRegressor(max_leaf_nodes=700)
 
     titanicModel.fit(x, y)
 
@@ -44,13 +44,4 @@ def initialize(featureList, x, y):
 
     return titanicModel
 
-def optimize(testX, testY, valX, valY):
-    bestMAE = 1
-    locBestMAE = 0
-    for maxLeaves in range(0,500):
-        mae = doMath.getMae(maxLeaves, valX, valY, testX, testY)
-        print(f"MAE = {mae} with maxLeaves = {maxLeaves}")\
-        
-        if mae <= bestMAE:
-            locBestMAE = maxLeaves
-            print(f"New best found with {maxLeaves} leaves! MAE = {mae}")
+#def optimize(testX, testY, valX, valY):
