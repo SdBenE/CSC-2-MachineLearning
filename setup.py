@@ -2,8 +2,9 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 #from sklearn.model_selection import train_test_split
+import doMath
 
-def initialize():
+def initialize(featureList, x, y):
     titanicData = pd.read_csv('modeling.csv')
         
     #print(titanicData.columns)
@@ -11,7 +12,6 @@ def initialize():
 
     #print(titanicData['Sex'])
 
-    y = titanicData.Survived
 
     #MANUAL NUMERICAL CODING 
 
@@ -32,11 +32,7 @@ def initialize():
     #titanicData['Embarked'].replace('S', 0, inplace=True)
 
 
-    featureList = ['Pclass', 'Sex', 'Age', 'SibSp','Parch', 'Fare', 'Embarked']
-
     #'Cabin',
-
-    x = titanicData[featureList]
     print(x)
     titanicModel = RandomForestRegressor()
 
@@ -47,3 +43,14 @@ def initialize():
     print(predicitons)
 
     return titanicModel
+
+def optimize(testX, testY, valX, valY):
+    bestMAE = 1
+    locBestMAE = 0
+    for maxLeaves in range(0,500):
+        mae = doMath.getMae(maxLeaves, valX, valY, testX, testY)
+        print(f"MAE = {mae} with maxLeaves = {maxLeaves}")\
+        
+        if mae <= bestMAE:
+            locBestMAE = maxLeaves
+            print(f"New best found with {maxLeaves} leaves! MAE = {mae}")
