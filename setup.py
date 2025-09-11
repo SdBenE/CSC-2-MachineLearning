@@ -44,4 +44,4 @@ def initialize(featureList, x, y):
 
     return titanicModel
 
-#def optimize(testX, testY, valX, valY):
+#def optimize(testX, testY, valX, valY): TODO MAYBE???
