@@ -3,6 +3,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 #from sklearn.model_selection import train_test_split
 import doMath
+import csv
 
 def initialize(featureList, x, y):
     titanicData = pd.read_csv('modeling.csv')
@@ -45,3 +46,17 @@ def initialize(featureList, x, y):
     return titanicModel
 
 #def optimize(testX, testY, valX, valY): TODO MAYBE???
+
+def formatSystem(predictions, idArg):
+
+    tableArg = pd.DataFrame({'PassengerId' : range(idArg, len(predictions) + idArg)})
+    tableArg['Survived'] = predictions
+
+    print(tableArg)
+    tableArg['Survived'] = tableArg['Survived'].astype(int)
+    print(tableArg)
+
+    return tableArg
+
+def spitOut(tableArg):
+    tableArg.to_csv('predictions.csv', index=False)
