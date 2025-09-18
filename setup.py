@@ -24,19 +24,10 @@ def initialize(featureList, x, y):
         ['Embarked', 'Q', 2],
     ]
 
-    for change in encodeList: #Replacements based on the encodeList above
+    for change in encodeList:
         titanicData[change[0]].replace(change[1], change[2], inplace=True)
 
-    #titanicData['Sex'].replace('male', 1, inplace=True) #changes the data to be modelable by the program
-    #titanicData['Sex'].replace('female', 0, inplace=True)
-
-    #titanicData['Embarked'].replace('S', 0, inplace=True)
-
-
-    #'Cabin',
-    print(x)
     titanicModel = RandomForestRegressor(max_leaf_nodes=700)
-
     titanicModel.fit(x, y)
 
     predicitons = titanicModel.predict(x)

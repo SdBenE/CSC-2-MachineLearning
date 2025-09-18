@@ -17,16 +17,15 @@ encodeList = [
     ['Embarked', 'Q', 2],
 ]
 
-for change in encodeList: #Replacements based on the encodeList above
+for change in encodeList:
     valData[change[0]].replace(change[1], change[2], inplace=True)
     testData[change[0]].replace(change[1], change[2], inplace=True)
 
 trainX = valData[featureList]
 trainY = valData.Survived
-valX = testData[featureList] #TODO: train_test_split???
+valX = testData[featureList]
 
 TitanicModel = setup.initialize(featureList, trainX, trainY)
-#TitanicModel = setup.optimize(TitanicModel, testX, testY, valX)
 doMath.getMAE(TitanicModel, trainX, trainY)
 
 predictions = TitanicModel.predict(valX)
